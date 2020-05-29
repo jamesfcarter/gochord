@@ -21,6 +21,10 @@ type Chord struct {
 	Strings []String
 }
 
+func IsFretted(fret int) bool {
+	return fret != Open && fret != Muted
+}
+
 func NewChord(name, layout string) Chord {
 	chrs := strings.Split(layout, "")
 	strs := make([]String, len(chrs))
@@ -50,7 +54,7 @@ func (c Chord) StringCount() int {
 func (c Chord) HighestFret() int {
 	highest := c.Capo
 	for _, s := range c.Strings {
-		if s.Fret == Muted {
+		if !IsFretted(s.Fret) {
 			continue
 		}
 		if s.Fret > highest {
@@ -63,7 +67,7 @@ func (c Chord) HighestFret() int {
 func (c Chord) LowestFret() int {
 	lowest := c.Capo
 	for _, s := range c.Strings {
-		if s.Fret == Muted {
+		if !IsFretted(s.Fret) {
 			continue
 		}
 		if s.Fret < lowest || lowest == 0 {
