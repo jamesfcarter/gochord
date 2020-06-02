@@ -51,6 +51,10 @@ func (c Chord) StringCount() int {
 	return len(c.Strings)
 }
 
+func (c Chord) String() string {
+	return c.Name + "\n" + c.FretBoard().String()
+}
+
 func (c Chord) HighestFret() int {
 	highest := c.Capo
 	for _, s := range c.Strings {
