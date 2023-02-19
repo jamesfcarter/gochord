@@ -64,9 +64,9 @@ func (c Chord) SVG(width, height int, out io.Writer) {
 	stringSpacing := (width - leftBorder - rightBorder) / (c.StringCount() - 1)
 	fretSpacing := (height - topBorder - bottomBorder) / len(fb.Frets)
 
-	svg.Text(g.hUnit(6), g.vUnit(6), c.Name, fmt.Sprintf("text-anchor:middle;font-size:%dpx", g.hUnit(6)))
+	svg.Text(g.hUnit(4), g.vUnit(6), c.Name, fmt.Sprintf("text-anchor:left;font-size:%dpx", g.hUnit(6)))
 	if fb.FirstFret != 0 {
-		svg.Text(width-rightBorder+g.hUnit(2), topBorder+g.vUnit(1), strconv.Itoa(fb.FirstFret), fmt.Sprintf("text-anchor:middle;font-size:%dpx", g.hUnit(4)))
+		svg.Text(width-rightBorder+g.hUnit(2), topBorder+g.vUnit(1), strconv.Itoa(fb.FirstFret), fmt.Sprintf("text-anchor:middle;font-size:%dpx", g.hUnit(6)))
 	}
 
 	for s := 0; s < c.StringCount(); s++ {
@@ -78,7 +78,7 @@ func (c Chord) SVG(width, height int, out io.Writer) {
 			height-bottomBorder,
 			g.lineStyle(1),
 		)
-		svg.Text(x, topBorder-g.vUnit(1), fb.Unfretted[s], fmt.Sprintf("text-anchor:middle;font-size:%dpx", g.hUnit(4)))
+		svg.Text(x, topBorder-g.vUnit(1), fb.Unfretted[s], fmt.Sprintf("text-anchor:middle;font-size:%dpx", g.hUnit(6)))
 	}
 
 	for f := 0; f <= len(fb.Frets); f++ {
